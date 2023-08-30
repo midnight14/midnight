@@ -24,6 +24,11 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     implementation 'mysql:mysql-connector-java:8.0.25'
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // lombok
+    implementation 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
