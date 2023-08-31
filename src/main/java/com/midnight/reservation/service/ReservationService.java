@@ -17,9 +17,10 @@ public class ReservationService {
     }
 
 
-    public void registReservationStatus(Integer reservationNo, Integer id) {
+    public Reservation registReservation(String id, ReservationDTO reservationDTO) {
 
-        Reservation reservation = reservationRepository.findByReservationNo(reservationNo);
+//        Reservation reservation = reservationRepository.findByReservationNo(reservationDTO.getReservationNo());
+        Reservation reservation = new Reservation();
 
         reservation.setReservationNo(reservation.getReservationNo());
         reservation.setTrainNo(reservation.getTrainNo());
@@ -30,8 +31,12 @@ public class ReservationService {
         reservation.setArrivalStn(reservation.getArrivalStn());
         reservation.setReservationTime(reservation.getReservationTime());
 
-        reservationRepository.save(reservation);
+        Reservation res = reservationRepository.save(reservation);
 
+        return res;
     }
+
+
+
 
 }

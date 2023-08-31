@@ -21,8 +21,8 @@ public class Reservation {
     @Column(name = "train_no")
     private String trainNo;
 
-//    @Column(name = "seat")
-//    private String seat;
+    @Column(name = "seat")
+    private Integer seat;
 
     @Column(name = "member")
     private String member;
