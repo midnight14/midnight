@@ -19,10 +19,14 @@ public class ReservationController {
 
     @PostMapping("/reservation")
     public ResponseEntity postReservation(HttpServletRequest request, @RequestBody ReservationDTO reqDto) {
-        String id = (String) request.getSession().getAttribute("id");
 
-        Reservation res = reservationService.registReservation(id, reqDto);
-
-        return ResponseEntity.ok(res);
+        try {
+            String id = (String) request.getSession().getAttribute("id");
+            Reservation res = reservationService.registReservation(id, reqDto);
+            return ResponseEntity.ok(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

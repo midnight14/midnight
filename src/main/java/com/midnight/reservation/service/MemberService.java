@@ -19,13 +19,17 @@ public class MemberService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public void registMember(MemberDTO newMember) {
+    public void registMember(MemberDTO newMember) throws Exception {
+        Optional<Member> foundMember = memberRepository.findById(newMember.getId());
+        if(foundMember.isPresent()) {
+            throw new Exception("이미 등록한 회원입니다.");
+        } else {
+            Member member =  modelMapper.map(newMember, Member.class);
 
-        Member member =  modelMapper.map(newMember, Member.class);
+            member.setPassword(passwordEncoder.encode(member.getPassword()));
 
-        member.setPassword(passwordEncoder.encode(member.getPassword()));
-
-        memberRepository.save(member);
+            memberRepository.save(member);
+        }
     }
 
     public Boolean login(String id, String password, HttpServletRequest request) {

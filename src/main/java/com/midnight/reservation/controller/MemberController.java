@@ -32,9 +32,13 @@ public class MemberController {
 
     @PostMapping("/regist")
     public ResponseEntity registMember(@ModelAttribute MemberDTO member) {
-        memberService.registMember(member);
-
-        return ResponseEntity.ok(true);
+        try {
+            memberService.registMember(member);
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/login")

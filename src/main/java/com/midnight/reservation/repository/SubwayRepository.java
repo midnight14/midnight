@@ -1,6 +1,8 @@
 package com.midnight.reservation.repository;
 
 import com.midnight.reservation.entity.Subway;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
@@ -10,5 +12,5 @@ import java.util.List;
 
 public interface SubwayRepository  extends JpaRepository<Subway, Integer> {
 
-    List<Subway> findByWeekTagAndStationNmAndLeftTimeBetween(Integer weekTag, String stationNm, LocalTime time1, LocalTime time2);
+    List<Subway> findByWeekTagAndStationNmAndLeftTimeBetween(Integer weekTag, String stationNm, LocalTime time1, LocalTime time2, Pageable pageable);
 }
