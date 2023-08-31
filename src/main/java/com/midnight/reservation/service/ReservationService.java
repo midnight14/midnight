@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -28,9 +29,10 @@ public class ReservationService {
     @Transactional
     public Reservation registReservation(String id, ReservationDTO reservationDTO) throws Exception {
 
-        Optional<Seat> foundSeat = seatRepository.findBySeatNoAndReservationStatusAndTrainNo(reservationDTO.getSeat(),
+        Optional<Seat> foundSeat = seatRepository.findBySeatNoAndReservationStatusAndTrainNoAndDate(reservationDTO.getSeat(),
                 true,
-                reservationDTO.getTrainNo());
+                reservationDTO.getTrainNo(),
+                LocalDate.now());
 
         if(foundSeat.isPresent()) {
             throw new Exception("좌석이 예약되어있습니다.");
