@@ -31,17 +31,17 @@ public class MemberController {
     private final AuthenticationService userDetailsService;
 
     @PostMapping("/regist")
-    public ResponseEntity registMember(@RequestBody MemberDTO member) {
+    public ResponseEntity registMember(@ModelAttribute MemberDTO member) {
         memberService.registMember(member);
 
         return ResponseEntity.ok(true);
     }
 
     @GetMapping("/login")
-    public Boolean login(@RequestBody Map<String, String> reqMap, HttpServletRequest request) {
+    public Boolean login(@ModelAttribute MemberDTO reqMap, HttpServletRequest request) {
 
-        String id = (String) reqMap.get("id");
-        String password = (String) reqMap.get("password");
+        String id = reqMap.getId();
+        String password = reqMap.getPassword();
 
         Boolean successStatus =  memberService.login(id, password, request);
 
