@@ -1,8 +1,16 @@
 package com.midnight.reservation.entity;
 
+import com.midnight.reservation.entity.Enum.ReservationStatus;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="reservation")
 public class Reservation {
@@ -19,7 +27,7 @@ public class Reservation {
     private String seat;
 
     @Column(name = "member")
-    private String Member;
+    private String member;
 
     @Column(name = "enroll_time")
     private LocalDateTime enrollTime;
@@ -36,5 +44,13 @@ public class Reservation {
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private ReservationStatus reservationStatus;
+
+
+
 
 }
+
+
