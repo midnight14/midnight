@@ -41,7 +41,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Boolean login(@ModelAttribute MemberDTO reqMap, HttpServletRequest request) {
 
         String id = reqMap.getId();
@@ -50,5 +50,10 @@ public class MemberController {
         Boolean successStatus =  memberService.login(id, password, request);
 
         return successStatus;
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request) {
+        request.getSession().invalidate();
     }
 }

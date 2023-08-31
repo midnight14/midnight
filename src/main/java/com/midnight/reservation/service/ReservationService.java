@@ -42,6 +42,7 @@ public class ReservationService {
             seat.setSeatNo(reservationDTO.getSeat());
             seat.setReservationStatus(true);
             seat.setTrainNo(reservationDTO.getTrainNo());
+            seat.setDate(LocalDate.now());
 
             Reservation reservation = new Reservation();
             reservation.setReservationNo(reservationDTO.getReservationNo());
