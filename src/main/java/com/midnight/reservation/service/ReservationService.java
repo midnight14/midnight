@@ -5,8 +5,8 @@ import com.midnight.reservation.entity.Reservation;
 import com.midnight.reservation.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class ReservationService {
@@ -18,25 +18,23 @@ public class ReservationService {
     }
 
 
+    @Transactional
     public Reservation registReservation(String id, ReservationDTO reservationDTO) {
 
         Reservation reservation = new Reservation();
 
-        reservation.setReservationNo(reservation.getReservationNo());
-        reservation.setTrainNo(reservation.getTrainNo());
-        reservation.setSeat(reservation.getSeat());
-        reservation.setMember(reservation.getMember());
-        reservation.setEnrollTime(reservation.getEnrollTime());
-        reservation.setDepartureStn(reservation.getDepartureStn());
-        reservation.setArrivalStn(reservation.getArrivalStn());
-        reservation.setReservationTime(reservation.getReservationTime());
+        reservation.setReservationNo(reservationDTO.getReservationNo());
+        reservation.setTrainNo(reservationDTO.getTrainNo());
+        reservation.setSeat(reservationDTO.getSeat());
+        reservation.setMember(id);
+        reservation.setEnrollTime(LocalDateTime.now());
+        reservation.setDepartureStn(reservationDTO.getDepartureStn());
+        reservation.setArrivalStn(reservationDTO.getArrivalStn());
+        reservation.setReservationTime(reservationDTO.getReservationTime());
+        reservation.setEndTime(reservationDTO.getEndTime());
 
         Reservation res = reservationRepository.save(reservation);
 
         return res;
     }
-
-
-
-
 }

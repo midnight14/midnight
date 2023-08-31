@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -37,10 +38,10 @@ public class Reservation {
     private String arrivalStn;
 
     @Column(name = "reservation_time")
-    private LocalDateTime reservationTime;
+    private LocalTime reservationTime;
 
     @Column(name = "end_time")
-    private LocalDateTime endTime;
+    private LocalTime endTime;
 
 
 
