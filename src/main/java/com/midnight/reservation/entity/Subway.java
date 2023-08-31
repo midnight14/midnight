@@ -15,9 +15,6 @@ public class Subway {
     private Integer idx;
 
     @Column
-    private LocalDate today;
-
-    @Column
     private Integer frCode;
 
     @Column
@@ -49,4 +46,7 @@ public class Subway {
 
     @Column
     private Integer inoutTag;
+
+    @Column
+    private String stationNm;
 }
