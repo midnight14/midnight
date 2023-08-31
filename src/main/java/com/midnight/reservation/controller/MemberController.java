@@ -42,14 +42,21 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public Boolean login(@ModelAttribute MemberDTO reqMap, HttpServletRequest request) {
+    public ResponseEntity login(@ModelAttribute MemberDTO reqMap, HttpServletRequest request) {
 
         String id = reqMap.getId();
         String password = reqMap.getPassword();
 
-        Boolean successStatus =  memberService.login(id, password, request);
+        Boolean successStatus = null;
+        try {
+            successStatus = memberService.login(id, password, request);
+            return ResponseEntity.ok(successStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
 
-        return successStatus;
+
     }
 
     @GetMapping("/logout")

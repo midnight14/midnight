@@ -5,6 +5,7 @@ import com.midnight.reservation.dto.ReservationDTO;
 import com.midnight.reservation.entity.Reservation;
 import com.midnight.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,9 @@ public class ReservationController {
         try {
             String id = (String) request.getSession().getAttribute("id");
             Reservation res = reservationService.registReservation(id, reqDto);
-            return ResponseEntity.ok(res);
+
+            return ResponseEntity.ok()
+                    .body(new JSONObject().appendField("reservation", res));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());

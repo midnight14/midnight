@@ -51,4 +51,32 @@ public class SubwayService {
 
         return subwayDtos;
     }
+
+    public List<SubwayDto> getTestSubwayList(String station, String time, Pageable pageable) {
+
+        Integer weekTag = 1;
+
+        LocalTime time1 = LocalTime.parse(time);
+        LocalTime time2 = time1.plusHours(1);
+
+        List<Subway> subways = subwayRepository.findByWeekTagAndStationNmAndLeftTimeBetween(weekTag, station, time1, time2, pageable);
+
+        List<SubwayDto> subwayDtos = new ArrayList<>();
+
+        for(Subway subway : subways) {
+            SubwayDto subwayDto =  modelMapper.map(subway, SubwayDto.class);
+            Duration duration = Duration.between(LocalTime.now(), subwayDto.getArrivalTime());
+            long differenceInMinutes = duration.toMinutes();
+
+            if(differenceInMinutes <= 0) {
+                subwayDto.setRemainedTime("곧 도착");
+            } else {
+                subwayDto.setRemainedTime(String.valueOf(differenceInMinutes) + "분");
+            }
+
+            subwayDtos.add(subwayDto);
+        }
+
+        return subwayDtos;
+    }
 }

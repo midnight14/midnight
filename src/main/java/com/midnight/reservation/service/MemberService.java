@@ -32,7 +32,7 @@ public class MemberService {
         }
     }
 
-    public Boolean login(String id, String password, HttpServletRequest request) {
+    public Boolean login(String id, String password, HttpServletRequest request) throws Exception {
 
         Optional<Member> member = memberRepository.findById(id);
 
@@ -44,10 +44,11 @@ public class MemberService {
                 request.getSession().setAttribute("pregnancyCycle", member.get().getPregnancyCycle());
 
                 return true;
+            } else {
+                throw new Exception("로그인 실패!");
             }
-            else return false;
         }
 
-        return false;
+        throw new Exception("로그인 실패!");
     }
 }
