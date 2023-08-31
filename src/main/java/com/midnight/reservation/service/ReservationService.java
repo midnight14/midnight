@@ -1,5 +1,6 @@
 package com.midnight.reservation.service;
 
+import com.midnight.reservation.dto.ReservationDTO;
 import com.midnight.reservation.entity.Reservation;
 import com.midnight.reservation.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,6 @@ public class ReservationService {
 
     public Reservation registReservation(String id, ReservationDTO reservationDTO) {
 
-//        Reservation reservation = reservationRepository.findByReservationNo(reservationDTO.getReservationNo());
         Reservation reservation = new Reservation();
 
         reservation.setReservationNo(reservation.getReservationNo());
