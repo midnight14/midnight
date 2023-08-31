@@ -23,7 +23,7 @@ public class ReservationService {
 
         reservation.setReservationNo(reservation.getReservationNo());
         reservation.setTrainNo(reservation.getTrainNo());
-        reservation.setSeat(reservation.getSeat());
+//        reservation.setSeat(reservation.getSeat());
         reservation.setMember(reservation.getMember());
         reservation.setEnrollTime(reservation.getEnrollTime());
         reservation.setDepartureStn(reservation.getDepartureStn());
