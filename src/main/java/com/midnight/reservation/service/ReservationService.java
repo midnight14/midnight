@@ -1,5 +1,6 @@
 package com.midnight.reservation.service;
 
+import com.midnight.reservation.dto.ReservationDTO;
 import com.midnight.reservation.entity.Reservation;
 import com.midnight.reservation.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
@@ -17,21 +18,27 @@ public class ReservationService {
     }
 
 
-    public void registReservationStatus(Integer reservationNo, Integer id) {
+    public Reservation registReservation(String id, ReservationDTO reservationDTO) {
 
-        Reservation reservation = reservationRepository.findByReservationNo(reservationNo);
+//        Reservation reservation = reservationRepository.findByReservationNo(reservationDTO.getReservationNo());
+        Reservation reservation = new Reservation();
 
-        reservation.setReservationNo(reservation.getReservationNo());
-        reservation.setTrainNo(reservation.getTrainNo());
-//        reservation.setSeat(reservation.getSeat());
-        reservation.setMember(reservation.getMember());
-        reservation.setEnrollTime(reservation.getEnrollTime());
-        reservation.setDepartureStn(reservation.getDepartureStn());
-        reservation.setArrivalStn(reservation.getArrivalStn());
-        reservation.setReservationTime(reservation.getReservationTime());
+        reservation.setTrainNo(reservationDTO.getTrainNo());
+//        reservation.setSeat(reservationDTO.getSeat());
+        reservation.setSeat(reservationDTO.getSeat());
+        reservation.setMember(id);
+        reservation.setEnrollTime(LocalDateTime.now());
+        reservation.setDepartureStn(reservationDTO.getDepartureStn());
+        reservation.setArrivalStn(reservationDTO.getArrivalStn());
+        reservation.setReservationTime(reservationDTO.getReservationTime());
+        reservation.setEndTime(reservationDTO.getEndTime());
 
-        reservationRepository.save(reservation);
+        Reservation res = reservationRepository.save(reservation);
 
+        return res;
     }
+
+
+
 
 }
