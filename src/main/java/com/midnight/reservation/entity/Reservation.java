@@ -1,8 +1,14 @@
 package com.midnight.reservation.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="reservation")
 public class Reservation {
@@ -15,11 +21,11 @@ public class Reservation {
     @Column(name = "train_no")
     private String trainNo;
 
-    @Column(name = "seat")
-    private String seat;
+//    @Column(name = "seat")
+//    private String seat;
 
     @Column(name = "member")
-    private String Member;
+    private String member;
 
     @Column(name = "enroll_time")
     private LocalDateTime enrollTime;
@@ -37,4 +43,9 @@ public class Reservation {
     private LocalDateTime endTime;
 
 
+
+
+
 }
+
+
